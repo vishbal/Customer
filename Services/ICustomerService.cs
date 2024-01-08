@@ -12,5 +12,6 @@ namespace CustomerApi.Services
         Customer AddCustomer(Customer newCustomer);
         Customer UpdateCustomer(Customer newCustomer);
         bool DeleteCustomer(Customer newCustomer);
+        bool DeleteAll();
     }
 }

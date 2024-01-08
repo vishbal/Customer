@@ -16,8 +16,8 @@ namespace CustomerApi.Data
                     Id = i,
                     FirstName = "Customer First Name - " + i,
                     LastName = "Customer Last Name - " + i,
-                    CreatedDate = new DateTime(),
-                    UpdatedDate = new DateTime(),
+                    CreatedDate =  DateTime.UtcNow,
+                    UpdatedDate = DateTime.UtcNow,
                     Email = "customer" + i + "@example.com"
                 });
             }
@@ -88,5 +88,10 @@ namespace CustomerApi.Data
             return false;
         }
 
+        public static bool DeleteAll()
+        {
+            Customers.Clear();
+            return Customers.Count == 0;
+        }
     }
 }
