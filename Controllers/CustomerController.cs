@@ -2,54 +2,51 @@
 using CustomerApi.Services;
 using CustomerApi.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace CustomerApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        public CustomerController()
+        private readonly ICustomerService _customerService;
+        public CustomerController(ICustomerService customerService)
         {
-            if (CustomerService.Customers.Count() == 0)
-                CustomerService.CreateCustomers();
+            _customerService = customerService;
         }
-
 
         // GET: api/Customer
         [HttpGet]
         public List<Customer> GetAll()
         {
-            return CustomerService.Customers;
+            return _customerService.GetAll();
         }
 
         // GET api/Customer/id
         [HttpGet("{id}")]
         public Customer GetCustomer(int id)
         {
-             return CustomerService.GetById(id);
+             return _customerService.GetById(id);
         }
 
         // POST api/Customer
         [HttpPost]
         public Customer AddCustomer([FromBody] Customer customer)
         {
-            return CustomerService.AddCustomer(customer);
+            return _customerService.AddCustomer(customer);
         }
 
         // PUT api/Customer
         [HttpPut()]
         public Customer UpdateCustomer([FromBody] Customer customer)
         {
-            return CustomerService.UpdateCustomer(customer);
+            return _customerService.UpdateCustomer(customer);
         }
 
         // DELETE api/Customer
         [HttpDelete()]
         public bool Delete([FromBody] Customer customer)
         {
-            return CustomerService.DeleteCustomer(customer);
+            return _customerService.DeleteCustomer(customer);
         }
     }
 }
