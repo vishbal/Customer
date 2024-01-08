@@ -2,7 +2,7 @@
 
 namespace CustomerApi.Services
 {
-    public static class CustomerData
+    public static class CustomerService
     {
         public static List<Customer> Customers = new List<Customer>();
 
@@ -77,7 +77,7 @@ namespace CustomerApi.Services
         {
             if (Exists(customer))
             {
-                var index = Customers.IndexOf(customer);
+                var index = Customers.FindIndex(c => c.Id == customer.Id);
                 Customers.RemoveAt(index);
                 return true;
             }

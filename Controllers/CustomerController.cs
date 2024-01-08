@@ -17,35 +17,35 @@ namespace CustomerApi.Controllers
         }
 
 
-        // GET: api/<CustomerController>
+        // GET: api/Customer
         [HttpGet]
-        public List<Customer> Get()
+        public List<Customer> GetAll()
         {
             return CustomerService.Customers;
         }
 
-        // GET api/<CustomerController>/5
+        // GET api/Customer/id
         [HttpGet("{id}")]
         public Customer GetCustomer(int id)
         {
              return CustomerService.GetById(id);
         }
 
-        // POST api/<CustomerController>
+        // POST api/Customer
         [HttpPost]
         public Customer AddCustomer([FromBody] Customer customer)
         {
             return CustomerService.AddCustomer(customer);
         }
 
-        // PUT api/<CustomerController>/5
+        // PUT api/Customer
         [HttpPut()]
         public Customer UpdateCustomer([FromBody] Customer customer)
         {
             return CustomerService.UpdateCustomer(customer);
         }
 
-        // DELETE api/<CustomerController>/5
+        // DELETE api/Customer
         [HttpDelete()]
         public bool Delete([FromBody] Customer customer)
         {
