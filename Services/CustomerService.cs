@@ -49,6 +49,11 @@ namespace CustomerApi.Services
             return CustomerData.DeleteCustomer(customer);
         }
 
+        public bool DeleteAll()
+        {
+            return CustomerData.DeleteAll();
+        }
+
     }
 
 

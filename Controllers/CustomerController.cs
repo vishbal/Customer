@@ -48,5 +48,12 @@ namespace CustomerApi.Controllers
         {
             return _customerService.DeleteCustomer(customer);
         }
+
+        // DELETE api/Customer
+        [HttpDelete("deleteAll")]
+        public bool DeleteAll()
+        {
+            return _customerService.DeleteAll();
+        }
     }
 }
