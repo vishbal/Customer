@@ -1,4 +1,4 @@
-using CustomerApi;
+using CustomerApi.ServiceContainer;
 
 var builder = WebApplication.CreateBuilder(args);
 

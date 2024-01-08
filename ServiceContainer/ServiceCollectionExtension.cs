@@ -1,6 +1,6 @@
 ﻿using CustomerApi.Services;
 
-namespace CustomerApi
+namespace CustomerApi.ServiceContainer
 {
     public static class ServiceCollectionExtension
     {
