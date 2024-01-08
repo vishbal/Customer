@@ -1,87 +1,52 @@
-﻿using CustomerApi.Models;
+﻿using CustomerApi.Data;
+using CustomerApi.Models;
 
 namespace CustomerApi.Services
 {
-    public static class CustomerService
+    public class CustomerService: ICustomerService
     {
-        public static List<Customer> Customers = new List<Customer>();
-
-
-        public static void CreateCustomers()
-        {
-            ClearCustomers();
-            for (int i = 1; i <= 20; i++)
-            {
-                Customers.Add(new Customer
-                {
-                    Id = i,
-                    FirstName = "Customer First Name - " + i,
-                    LastName = "Customer Last Name - " + i,
-                    CreatedDate = new DateTime(),
-                    UpdatedDate = new DateTime(),
-                    Email = "customer" + i + "@example.com"
-                });
-            }
+        public CustomerService() {
+            if (CustomerData.Customers.Count == 0)
+                CustomerData.CreateCustomers();
         }
-        public static void ClearCustomers()
+         public void CreateCustomers()
         {
-            Customers.Clear();
+            CustomerData.CreateCustomers();
+        }
+        public void ClearCustomers()
+        {
+            CustomerData.ClearCustomers();
         }
 
-        public static bool Exists(Customer customer)
+        public bool Exists(Customer customer)
         {
-            return Customers.Any(x => x.Email == customer.Email);
+            return CustomerData.Exists(customer);
         }
 
-        public static Customer GetById(int id)
+        public List<Customer> GetAll()
         {
-            var customer = new Customer();
-            if (Customers.Any(c => c.Id == id))
-                customer = Customers.Find(c => c.Id == id);
+            return CustomerData.GetAll();
+        }
 
-            return customer;
+        public Customer GetById(int id)
+        {
+            return CustomerData.GetById(id);
         }
 
 
-        public static Customer AddCustomer(Customer newCustomer)
+        public Customer AddCustomer(Customer newCustomer)
         {
-            if (!Exists(newCustomer))
-            {
-                newCustomer.Id = Customers.Max(c => c.Id) + 1;
-                Customers.Add(newCustomer);
-            }
-            else
-            {
-                newCustomer = Customers.First(c => c.Email == newCustomer.Email);
-            }
-            return newCustomer;
+            return CustomerData.AddCustomer(newCustomer);
         }
 
-        public static Customer UpdateCustomer(Customer customer)
+        public Customer UpdateCustomer(Customer customer)
         {
-            var existingCustomer = GetById(customer.Id);
-            var index = Customers.IndexOf(existingCustomer);
-            if (index > -1)
-            {
-                Customers[index] = customer;
-                return Customers[index];
-            }
-            else
-            {
-                customer.Id = 0;
-            }
-            return customer;
+            return CustomerData.UpdateCustomer(customer);
         }
 
-        public static bool DeleteCustomer(Customer customer)
+        public bool DeleteCustomer(Customer customer)
         {
-            if (Exists(customer))
-            {
-                var index = Customers.FindIndex(c => c.Id == customer.Id);
-                Customers.RemoveAt(index);
-                return true;
-            }
-            return false;
+            return CustomerData.DeleteCustomer(customer);
         }
 
     }
